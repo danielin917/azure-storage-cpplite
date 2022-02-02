@@ -39,8 +39,11 @@ namespace azure {  namespace storage_lite {
 #else
         uuid_t uuid;
         char uuid_cstr[37]; // 36 byte uuid plus null.
-        uuid_generate(uuid);
-        uuid_unparse(uuid, uuid_cstr);
+        for (int ii = 0; ii < 36; ++ii) {
+          uuid_cstr[ii] = rand() % sizeof(char);
+        }
+        //uuid_generate(uuid);
+        //uuid_unparse(uuid, uuid_cstr);
         res = std::string(uuid_cstr);
 #endif
 
